@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.Python
+venv/
+.venv/
+env/
+.env
+*.egg-info/
+.eggs/
+
+# IDE / OS
+.DS_Store
+.idea/
+.vscode/
+*.swp
+
+# Keep these so others can run without building (uncomment to ignore instead):
+# index/
+# data/processed/
+
+# Optional: ignore raw data if large (uncomment to avoid pushing big CSV)
+# data/raw/
+# books.csv
+# archive.zip
