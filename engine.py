@@ -9,6 +9,13 @@ import pandas as pd
 
 import config
 
+# Safe string for display (handles float/NaN from pandas)
+def _safe_str(val, max_len: int = 1000) -> str:
+    if val is None or (isinstance(val, float) and pd.isna(val)):
+        return ""
+    return str(val)[:max_len]
+
+
 # Lazy load embedding model
 _embedding_model = None
 
@@ -97,13 +104,13 @@ def recommend(
     out = []
     for _, r in rows.iterrows():
         out.append({
-            "title": r["title"],
-            "author": r["author"],
-            "description": (r.get("description") or "")[:500],
-            "image_url": r.get("image_url") or "",
-            "emotion": r.get("emotion", ""),
-            "rating": r.get("rating", 0),
-            "rating_count": int(r.get("rating_count", 0)),
+            "title": _safe_str(r.get("title"), 500),
+            "author": _safe_str(r.get("author"), 500),
+            "description": _safe_str(r.get("description"), 500),
+            "image_url": _safe_str(r.get("image_url"), 1000),
+            "emotion": _safe_str(r.get("emotion"), 100),
+            "rating": float(r.get("rating", 0)) if pd.notna(r.get("rating")) else 0.0,
+            "rating_count": int(r.get("rating_count", 0)) if pd.notna(r.get("rating_count")) else 0,
             "score": float(r["score"]),
         })
     return out
@@ -116,13 +123,13 @@ def get_popular(books_df: pd.DataFrame, n: int = 10) -> list[dict]:
     df = df.sort_values("sales", ascending=False).head(n)
     return [
         {
-            "title": r["title"],
-            "author": r["author"],
-            "description": (r.get("description") or "")[:500],
-            "image_url": r.get("image_url") or "",
-            "emotion": r.get("emotion", ""),
-            "rating": r.get("rating", 0),
-            "rating_count": int(r.get("rating_count", 0)),
+            "title": _safe_str(r.get("title"), 500),
+            "author": _safe_str(r.get("author"), 500),
+            "description": _safe_str(r.get("description"), 500),
+            "image_url": _safe_str(r.get("image_url"), 1000),
+            "emotion": _safe_str(r.get("emotion"), 100),
+            "rating": float(r.get("rating", 0)) if pd.notna(r.get("rating")) else 0.0,
+            "rating_count": int(r.get("rating_count", 0)) if pd.notna(r.get("rating_count")) else 0,
             "score": float(r["sales"]),
         }
         for _, r in df.iterrows()
@@ -139,13 +146,13 @@ def get_by_emotion(books_df: pd.DataFrame, emotion: str, n: int = 20) -> list[di
     df = df.sort_values("sales", ascending=False).head(n)
     return [
         {
-            "title": r["title"],
-            "author": r["author"],
-            "description": (r.get("description") or "")[:500],
-            "image_url": r.get("image_url") or "",
-            "emotion": r.get("emotion", ""),
-            "rating": r.get("rating", 0),
-            "rating_count": int(r.get("rating_count", 0)),
+            "title": _safe_str(r.get("title"), 500),
+            "author": _safe_str(r.get("author"), 500),
+            "description": _safe_str(r.get("description"), 500),
+            "image_url": _safe_str(r.get("image_url"), 1000),
+            "emotion": _safe_str(r.get("emotion"), 100),
+            "rating": float(r.get("rating", 0)) if pd.notna(r.get("rating")) else 0.0,
+            "rating_count": int(r.get("rating_count", 0)) if pd.notna(r.get("rating_count")) else 0,
             "score": float(r["sales"]),
         }
         for _, r in df.iterrows()
