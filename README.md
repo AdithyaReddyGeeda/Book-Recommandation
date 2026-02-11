@@ -2,6 +2,8 @@
 
 Vector-based recommendation engine over ~6,810 books with emotion-aware search and a simple sales/popularity score. Built for portfolio use (local models, no paid APIs).
 
+**Live app:** [https://book-recommandation-adithyareddygeeda.streamlit.app/](https://book-recommandation-adithyareddygeeda.streamlit.app/)
+
 ## Features
 
 - **Vector search**: Dense embeddings (sentence-transformers) + ChromaDB for fast similarity search.
