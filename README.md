@@ -22,7 +22,6 @@ Vector-based recommendation engine over ~6,810 books with emotion-aware search a
 1. **Clone / open project** and create a virtualenv (optional but recommended):
 
    ```bash
-   cd "/Users/adithyareddy/Documents/AI Projects/LLM Book Recommendor"
    python -m venv venv
    source venv/bin/activate   # Windows: venv\Scripts\activate
    ```
