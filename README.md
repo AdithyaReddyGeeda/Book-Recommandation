@@ -67,8 +67,6 @@ Vector-based recommendation engine over ~6,810 books with emotion-aware search a
 
 ### Sharing the vector database on GitHub
 
-Yes. You can commit the `index/` folder so that **anyone who clones the repo (or deploys to Streamlit Cloud) can run the app without building the index**.
-
 1. **Build the index locally** (once):
    ```bash
    python data_prep.py --target 6810
